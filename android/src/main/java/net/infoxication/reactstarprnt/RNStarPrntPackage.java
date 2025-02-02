@@ -1,5 +1,5 @@
 
-package net.infoxication.reactstarprnt;
+package net.axelmarciano.rnstarprnt;
 
 import java.util.Arrays;
 import java.util.Collections;

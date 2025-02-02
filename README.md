@@ -1,48 +1,71 @@
+# rn-star-prnt
 
-# react-native-star-prnt
+React Native bridge for [Star Micronics printers](http://www.starmicronics.com/pages/All-Products).  
 
-react-native bridge for [Star micronics printers](http://www.starmicronics.com/pages/All-Products).
+This is a **minimal maintenance fork** of [`react-native-star-prnt`](https://github.com/infoxicator/react-native-star-prnt), focused on **keeping the package functional** with updated dependencies. I do not actively maintain or provide support for issues, but contributions are welcome!  
 
-Ionic/Cordova Version ➜ [here](https://github.com/auctifera-josed/starprnt)
+## Why This Fork?  
 
-## Installation
+- The original package was outdated and had compatibility issues.  
+- I updated the **iOS native code** to use the latest `xcframework` from [Star Micronics' official SDK](https://github.com/star-micronics/starprnt-sdk-ios-swift).  
+- This **fixes issues running on the iOS simulator** and ensures compatibility with recent Xcode versions.  
+- I **bumped dependencies**, ensuring the package works with recent React Native versions.  
+- **Converted `.m` files to `.mm`** where necessary to support C++ code.  
 
-`$ npm install react-native-star-prnt --save`
+### Why Not Use `react-native-star-io10`?  
 
-### Link
+The newer `react-native-star-io10` package is well-maintained, but it **completely breaks printing on the TSP100**, which is my target printer. This fork ensures the older implementation remains functional while staying compatible with modern React Native versions.  
 
-`$ react-native link react-native-star-prnt`
+---
 
+## Installation  
 
-#### iOS Configuration
+```sh  
+$ npm install rn-star-prnt --save  
+```  
 
-1. In XCode, go to Build Phases, Link Binary with Libraries and Add the following frameworks:
+### Linking  
 
-    - Go to `node_modules` ➜ `react-native-star-prnt` ➜ `ios` ➜ `Frameworks` and add `StarIO.framework` and `StarIO_Extension.framework`
-    - Add the `CoreBluetooth.framework`
-    - Add the `ExternalAccessory.framework`
-2. Go to Build Settings ➜ Search Paths and Add 
-`$(PROJECT_DIR)/../node_modules/react-native-star-prnt/ios/Frameworks` to Framework Search Paths  
+```sh  
+$ react-native link rn-star-prnt  
+```  
 
-For Bluetooth printers:
+#### iOS Configuration  
 
-1. Click on the information property list file (default : “Info.plist”).
-2. Add the “Supported external accessory protocols” Key.
-3. Click the triangle of this key and set the value for the `Item 0` to `jp.star-m.starpro`
+1. Open Xcode, go to **Build Phases** > **Link Binary with Libraries**, and add the following frameworks:  
+   - Go to `node_modules/rn-star-prnt/ios/Frameworks` and add `StarIO.xcframework` and `StarIO_Extension.xcframework`.  
+   - Add `CoreBluetooth.framework` and `ExternalAccessory.framework`.  
 
-## Usage
-```javascript
-import { StarPRNT } from 'react-native-star-prnt';
+2. Go to **Build Settings** > **Search Paths** and add:  
+   ```sh  
+   $(PROJECT_DIR)/../node_modules/rn-star-prnt/ios/Frameworks  
+   ```  
+   to **Framework Search Paths**.  
 
-async function portDiscovery() {
-    try {
-      let printers = await StarPRNT.portDiscovery('All');
-      console.log(printers);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+3. For **Bluetooth printers**, update your `Info.plist` file:  
+   - Add **Supported external accessory protocols** (`UISupportedExternalAccessoryProtocols`).  
+   - Set `Item 0` to:  
+     ```sh  
+     jp.star-m.starpro  
+     ```  
 
-```
-  
-## Take a look at the [Documentation](/Documentation.md)
+---
+
+## Usage  
+
+```javascript  
+import { StarPRNT } from 'rn-star-prnt';
+
+async function portDiscovery() {  
+    try {  
+        let printers = await StarPRNT.portDiscovery('All');  
+        console.log(printers);  
+    } catch (e) {  
+        console.error(e);  
+    }  
+}  
+```  
+
+## Contributing  
+
+I am **not actively maintaining** this package beyond ensuring it remains functional. However, **pull requests are welcome** if you want to improve it!  

@@ -1,5 +1,5 @@
 
-package net.infoxication.reactstarprnt;
+package net.axelmarciano.rnstarprnt;
 
 import android.content.ContentResolver;
 import android.content.Context;
