@@ -1,4 +1,3 @@
-
 package net.axelmarciano.rnstarprnt;
 
 import android.content.ContentResolver;
@@ -13,7 +12,7 @@ import android.provider.MediaStore;
 import android.text.TextPaint;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.StaticLayout;
 import android.text.Layout;
 import android.util.Base64;
@@ -164,7 +163,19 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
 
     String portSettings = getPortSettingsOption(emulation);
     if (starIoExtManager != null && starIoExtManager.getPort() != null) {
-      starIoExtManager.disconnect(null);
+      starIoExtManager.disconnect(new IConnectionCallback() {
+          @Override
+          public void onConnected(ConnectResult connectResult) {
+            // nothing
+          }
+
+          @Override
+          public void onDisconnected() {
+            //sendEvent("printerOffline", null);
+            starIoExtManager.setListener(null); //remove the listener?
+            promise.resolve("Printer Disconnected");
+          }
+    });
     }
     starIoExtManager = new StarIoExtManager(hasBarcodeReader ? StarIoExtManager.Type.WithBarcodeReader : StarIoExtManager.Type.Standard, portName, portSettings, 10000, context);
     starIoExtManager.setListener(starIoExtManagerListener);
@@ -908,7 +919,4 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
         }
 
     };
-
-
-
 }
