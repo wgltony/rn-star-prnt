@@ -1,6 +1,6 @@
 {
   "name": "rn-star-prnt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Updated fork of react-native-star-prnt to maintain compatibility and functionality with Star Micronics Bluetooth/LAN printers",
   "types": "./types/index.d.ts",
   "main": "index.js",
