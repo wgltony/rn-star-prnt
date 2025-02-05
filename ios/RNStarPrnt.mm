@@ -96,15 +96,7 @@ RCT_REMAP_METHOD(portDiscovery,
         }
     }
     
-    if (info.count > 0) {
-        resolve(info);
-    } else {
-        NSError *err = [NSError errorWithDomain:@"StarPrntErrorDomain"
-                                           code:-1
-                                       userInfo:@{NSLocalizedDescriptionKey: @"No printers found"}];
-        NSLog(@"No printers found");
-        reject(@"no_printers_found", @"No printers found", err);
-    }
+    resolve(info)
 }
 
 RCT_REMAP_METHOD(checkStatus,
