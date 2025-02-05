@@ -96,7 +96,7 @@ RCT_REMAP_METHOD(portDiscovery,
         }
     }
     
-    resolve(info)
+    resolve(info);
 }
 
 RCT_REMAP_METHOD(checkStatus,
