@@ -598,7 +598,18 @@ RCT_REMAP_METHOD(print,
             BOOL bothScale = ([[command valueForKey:@"bothScale"] boolValue] == NO) ? NO : YES;
             SCBBitmapConverterRotation rotation = SCBBitmapConverterRotationNormal;
             
-            UIFont *font = [UIFont fontWithName:fontName size:fontSize * 2];
+            BOOL isBold = [[command valueForKey:@"isBold"] boolValue] == NO) ? NO : YES;// Check if isBold is true
+
+            // Log the value of isBold
+            //NSLog(@"isBold: %@", isBold ? @"YES" : @"NO");
+
+            UIFont *font;
+            if (isBold) {
+                font = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold", fontName] size:fontSize * 2]; // Specify bold font
+            } else {
+                font = [UIFont fontWithName:fontName size:fontSize * 2]; // Regular font
+            }
+            
             UIImage *image = [self imageWithString:text font:font width:width];
             
             if ([command valueForKey:@"alignment"]) {
