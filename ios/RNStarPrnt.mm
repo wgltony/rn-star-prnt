@@ -598,7 +598,7 @@ RCT_REMAP_METHOD(print,
             BOOL bothScale = ([[command valueForKey:@"bothScale"] boolValue] == NO) ? NO : YES;
             SCBBitmapConverterRotation rotation = SCBBitmapConverterRotationNormal;
             
-            BOOL isBold = [[command valueForKey:@"isBold"] boolValue] == NO) ? NO : YES;// Check if isBold is true
+            BOOL isBold = ([[command valueForKey:@"isBold"] boolValue] == NO) ? NO : YES;// Check if isBold is true
 
             // Log the value of isBold
             //NSLog(@"isBold: %@", isBold ? @"YES" : @"NO");
